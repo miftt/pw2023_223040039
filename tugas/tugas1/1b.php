@@ -1,5 +1,5 @@
 <?php
-$x = 39;
+$angka = 39;
 ?>
 
 <!DOCTYPE html>
@@ -11,10 +11,10 @@ $x = 39;
     <title>1b</title>
 </head>
 <body>
-   <p><?php echo "Aku adalah angka " . "<b>" . $x . "</b>" ;?></p>
-   <p><?php echo "Jika aku dikali 5, maka aku sekarang menjadi " ."<b>" . $x*5 . "</b>" ;?></p>
-   <p><?php echo "Jika aku dibagi 2, maka aku sekarang menjadi " ."<b>" . $x/2 . "</b>" ;?></p>
-   <p><?php echo "Jika aku ditambah 75, maka aku sekarang menjadi " ."<b>" . $x+75 . "</b>" ;?></p>
-   <p><?php echo "Jika aku dikurang 20, maka aku sekarang menjadi " ."<b>" . $x-20 . "</b>" ;?></p>
+   <p><?php echo "Aku adalah angka " . "<b>" . $angka . "</b>" ;?></p>
+   <p><?php echo "Jika aku dikali 5, maka aku sekarang menjadi " ."<b>" . ($angka *= 5) . "</b>" ;?></p>
+   <p><?php echo "Jika aku dibagi 2, maka aku sekarang menjadi " ."<b>" . ($angka /= 2) . "</b>" ;?></p>
+   <p><?php echo "Jika aku ditambah 75, maka aku sekarang menjadi " ."<b>" . ($angka += 75) . "</b>" ;?></p>
+   <p><?php echo "Jika aku dikurang 20, maka aku sekarang menjadi " ."<b>" . ($angka -= 20) . "</b>" ;?></p>
 </body>
 </html>
