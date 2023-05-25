@@ -207,7 +207,7 @@
     <footer class="footer">
       <div class="container">
         <div class="footer__inner">
-          <div class="footer__cooper">Copyright © <a href="https://github.com/miftt" class="footer__link-bio" target="_blank">miftt</a>, 2022. All rights reserved.</div>
+          <div class="footer__cooper">Copyright © <a href="https://github.com/miftt" class="footer__link-bio" target="_blank">miftt</a>, 2023. All rights reserved.</div>
         </div>
       </div>
     </footer>

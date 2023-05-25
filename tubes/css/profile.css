@@ -1,0 +1,135 @@
+:root {
+  --blue: #225e5b;
+  --dark-blue: #0a2430;
+  --dark-grey: #202422;
+  --ijosangatgelap: #548570;
+  --ijogelap: #6b9080;
+  --ijoagakterang: #a4c3b2;
+  --ijosetengahterang: #cce3de;
+  --ijoterang: #eaf4f4;
+  --ijopalingterang: #f6fff8;
+}
+
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--ijoterang);
+  animation: fadeInAnimation ease 1.3s;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--dark-blue);
+}
+
+.img_profile {
+  display: block;
+  margin: 20px auto;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+.upload-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.upload-container input[type="file"] {
+  display: none;
+}
+
+.upload-container label {
+  display: inline-block;
+  padding: 8px 20px;
+  background-color: var(--blue);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.upload-container label:hover {
+  background-color: var(--dark-blue);
+}
+
+#file-name {
+  display: inline-block;
+  margin-left: 10px;
+  font-weight: bold;
+}
+.upload-btn {
+  display: none;
+  background-color: var(--blue);
+  color: #fff;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.upload-btn.show {
+  display: block;
+}
+.img-preview {
+  margin-top: 20px;
+  max-width: 100%;
+  height: auto;
+}
+p {
+  margin-bottom: 10px;
+  color: var(--dark-grey);
+}
+
+strong {
+  color: var(--dark-blue);
+}
+
+a {
+  text-decoration: none;
+  color: var(--blue);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--dark-blue);
+}
+
+.logout-link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #f44336;
+  transition: color 0.3s ease;
+}
+
+.logout-link:hover {
+  color: #e53935;
+}

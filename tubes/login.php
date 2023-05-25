@@ -7,27 +7,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
     <link rel="stylesheet" href="css/loginn.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
     <h2>Login Terlebih Dahulu</h2>
+    <?php
+    if (isset($error_message)) { ?>
+        <p class="error"><?php echo $error_message; ?></p>
+    <?php } ?>
+    <?php if (isset($_GET['success']) && $_GET['success'] == 0) { ?>
+        <p class="error">Username atau email sudah digunakan. Silahkan pilih username atau email lain.</p>
+    <?php } ?>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="#">
+            <form action="register.php" method="POST">
                 <h1>Create Account</h1>
-                <div class="social-container">
+                <?php
+                if (isset($error_message)) { ?>
+                    <p class="error"><?php echo $error_message; ?></p>
+                <?php } ?>
+                <?php if (isset($_GET['success']) && $_GET['success'] == 0) { ?>
+                    <p class="error">Username atau email sudah digunakan. Silahkan pilih username atau email lain.</p>
+                <?php } ?>
+                <!-- <div class="social-container">
                     <a href="#" class="social"><i class="fa-brands fa-facebook"></i>
                         <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                </div>
-                <span>or use your email for registration</span>
-                <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <button>Sign Up</button>
+                </div> -->
+                <!-- <span>or use your email for registration</span> -->
+                <input type="text" name="username" placeholder="username*" required />
+                <input type="text" name="fullname" placeholder="Full Name*" required />
+                <select name="jenis_kelamin" require>
+                    <option value="">Pilih jenis kelamin*</option>
+                    <option value="laki-laki">Laki-laki</option>
+                    <option value="perempuan">Perempuan</option>
+                </select>
+                <input type="date" name="tgl_lahir" placeholder="Tanggal Lahir*" required />
+                <input type="number" name="phonenumber" placeholder="Phone Number" />
+                <input type="email" name="email" placeholder="Email*" required />
+                <input type="password" name="password" placeholder="Password*" required />
+                <button class="submit" type="submit" name="submit" value="signup">Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form action="signin.php" method="POST">
                 <h1>Sign in</h1>
                 <div class="social-container">
                     <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -35,10 +58,16 @@
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your account</span>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="username" name="username" placeholder="Username" required />
+                <input type="password" name="password" placeholder="Password" required />
                 <a href="#">Forgot your password?</a>
-                <button>Sign In</button>
+                <button type="submit" name="signin">Sign In</button>
+                <?php if (isset($_GET['login_error']) && $_GET['login_error'] == 1) { ?>
+                    <p class="error">Username or password is incorrect.</p>
+                <?php } ?>
+                <?php if (isset($_GET['login_success']) && $_GET['login_success'] == 1) { ?>
+                    <p class="success">Login berhasil!</p>
+                <?php } ?>
             </form>
         </div>
         <div class="overlay-container">
