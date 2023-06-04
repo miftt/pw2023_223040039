@@ -1,14 +1,3 @@
-<?php
-include 'config.php';
-session_start();
-
-// Periksa apakah pengguna telah login
-if (isset($_SESSION['username'])) {
-    // Jika tidak ada sesi login, arahkan ke halaman login
-    header("Location: index.php");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 

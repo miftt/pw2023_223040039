@@ -31,8 +31,8 @@ if (isset($_POST['submit'])) {
             exit();
         } else {
             // Membuat query untuk menyimpan data pengguna ke dalam tabel "users"
-            $sql = "INSERT INTO users (username, password, full_name, email, phone_number, address, jenis_kelamin, tgl_lahir, balance)
-                    VALUES ('$username', '$password', '$name', '$email', '$phoneNumber', '', '$kelamin', '$tgl_lahir', 0)";
+            $sql = "INSERT INTO users (username, password, full_name, email, phone_number, address, jenis_kelamin, tgl_lahir, balance,role)
+                    VALUES ('$username', '$password', '$name', '$email', '$phoneNumber', '', '$kelamin', '$tgl_lahir', 0,'user')";
 
             if (mysqli_query($conn, $sql)) {
                 header("Location: login.php?success=1");

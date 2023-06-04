@@ -1,3 +1,7 @@
+<?php
+include 'config.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +56,38 @@
                 <a href="#contact" class="menu__link">Contact</a>
               </li>
               <li class="menu__item">
-                <a href="login.php" class="menu__link">Login</a>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') { ?>
+                  <div class="dropdown">
+                    <a href="#" class="menu__link"><?= $_SESSION['username'] ?></a>
+                    <img class="dropdown__arrow" src="img/icon/dropDownArrow.png" width="8px">
+                    <ul class="submenu">
+                      <li class="submenu__item">
+                        <a href="profile.php" class="submenu__link">Profile</a>
+                      </li>
+                      <li class="submenu__item">
+                        <a href="halaman_admin.php" class="submenu__link">Admin Dashboard</a>
+                      </li>
+                      <li class="submenu__item">
+                        <a href="logout.php" class="submenu__link">Logout</a>
+                      </li>
+                    </ul>
+                  </div>
+                <?php } elseif (isset($_SESSION['username'])) { ?>
+                  <div class="dropdown">
+                    <a href="#" class="menu__link"><?= $_SESSION['username'] ?></a>
+                    <img class="dropdown__arrow" src="img/icon/dropDownArrow.png" width="8px">
+                    <ul class="submenu">
+                      <li class="submenu__item">
+                        <a href="profile.php" class="submenu__link">Profile</a>
+                      </li>
+                      <li class="submenu__item">
+                        <a href="logout.php" class="submenu__link">Logout</a>
+                      </li>
+                    </ul>
+                  </div>
+                <?php } else { ?>
+                  <a href="login.php" class="menu__link">Login</a>
+                <?php } ?>
               </li>
             </ul>
           </nav>
@@ -81,7 +116,7 @@
       <section class="menus" id="menus">
         <div class="container">
           <div class="menus__inner">
-            <h1 class="title">Healthy, Happy,<br />Humane<span>.</span></h1>
+            <h1 class="title">Healthy<span>,</span> Happy<span>,</span> <br />Humane<span>.</span></h1>
             <div class="menus__row" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="2000">
               <div class="menus__column menus__column--one">
                 <div class="menus__item">

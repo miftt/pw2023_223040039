@@ -207,11 +207,7 @@ p.error {
 .container.right-panel-active .overlay-container {
   transform: translateX(-100%);
 }
-.img_profile {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
+
 .overlay {
   background: #548570;
   background: -webkit-linear-gradient(to right, #548570, #548570);

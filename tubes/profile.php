@@ -83,9 +83,9 @@ if (mysqli_num_rows($result) > 0) {
     $phone_number = htmlspecialchars($row['phone_number']);
     $address = htmlspecialchars($row['address']);
     $balance = htmlspecialchars($row['balance']);
-    $kelamin = htmlspecialchars($row['jenis_kelamin']);
-    $tgl_lahir = htmlspecialchars($row['tgl_lahir']);
-    $image = htmlspecialchars($row['img_profile']);
+    $kelamin = $row['jenis_kelamin'];
+    $tgl_lahir = $row['tgl_lahir'];
+    $image = $row['img_profile'];
 } else {
     // Data pengguna tidak ditemukan
     echo "Data pengguna tidak ditemukan.";
@@ -99,36 +99,54 @@ mysqli_close($conn);
 <html>
 
 <head>
-    <title><?php echo $full_name; ?> Profile </title>
-    <link rel="stylesheet" href="css/profile.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ======== FONTS ======================== -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:regular,500,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Palanquin+Dark:regular,500,600,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Sniglet:regular,800&display=swap" rel="stylesheet" />
+
+    <title><?php echo $full_name; ?> Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/profile.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>Halo <?php echo $full_name; ?></h1>
-        <?php if (!empty($image)) { ?>
-            <img src="<?php echo 'img/' . $image; ?>" width="250" class="img_profile">
-        <?php } else { ?>
-            <img src="img/default.png" alt="Default Image" width="250" class="img_profile">
-        <?php } ?>
-        <form action="" method="POST" enctype="multipart/form-data">
-            <div class="upload-container">
-                <input type="file" name="image" id="upload-file" onchange="displayFileName()">
-                <label for="upload-file">Ganti Photo Profile</label>
-                <span id="file-name"></span>
+        <div class="profile-container">
+            <a href="index.php" class="back-link">Kembali ke Halaman Utama</a>
+            <h1>Halo <?php echo $full_name; ?></h1>
+            <?php if (!empty($image)) { ?>
+                <img src="<?php echo 'img/' . $image; ?>" class="img-profile">
+            <?php } else { ?>
+                <img src="img/default.png" alt="Default Image" class="img-profile">
+            <?php } ?>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div class="upload-container">
+                    <input type="file" name="image" id="upload-file" onchange="displayFileName()" class="form-control-file">
+                    <label for="upload-file" class="btn btn-primary">Ganti Photo Profile</label>
+                    <span id="file-name"></span>
+                </div>
+                <button type="submit" name="upload" class="btn btn-primary upload-btn">Upload Image</button>
+            </form>
+            <div class="profile-info">
+                <p><strong>Username:</strong> <?php echo $username; ?></p>
+                <p><strong>Password:</strong> <a href="#">Change Password</a></p>
+                <p><strong>Full Name:</strong> <?php echo $full_name; ?><a href="#"> edit</a></p>
+                <p><strong>Jenis Kelamin:</strong> <?php echo $kelamin; ?><a href="#"> edit</a></p>
+                <p><strong>Tanggal Lahir:</strong> <?php echo $tgl_lahir; ?><a href="#"> edit</a></p>
+                <p><strong>Email:</strong> <?php echo $email; ?></p>
+                <p><strong>Phone Number:</strong> <?php echo $phone_number; ?><a href="#"> edit</a></p>
+                <p><strong>Alamat:</strong> <?php echo $address; ?><a href="#"> edit</a></p>
+                <p><strong>Saldo:</strong> <?php echo $balance; ?><a href="#"> isi saldo</a></p>
             </div>
-            <button type="submit" name="upload" class="upload-btn">Upload Image</button>
-        </form>
-        <p><strong>Username:</strong> <?php echo $username; ?></p>
-        <p><strong>Password:</strong> <a href="#">Change Password</a></p>
-        <p><strong>Full Name:</strong> <?php echo $full_name; ?><a href="#"> edit</a></p>
-        <p><strong>Jenis Kelamin:</strong> <?php echo $kelamin; ?><a href="#"> edit</a></p>
-        <p><strong>Email:</strong> <?php echo $email; ?></p>
-        <p><strong>Phone Number:</strong> <?php echo $phone_number; ?><a href="#"> edit</a></p>
-        <p><strong>Alamat:</strong> <?php echo $address; ?><a href="#"> edit</a></p>
-        <p><strong>Saldo:</strong> <?php echo $balance; ?><a href="#"> isi saldo</a></p>
-        <a class="logout-link" href="logout.php">Logout</a>
+            <a class="btn btn-danger logout-link" href="logout.php">Logout</a>
+        </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         function displayFileName() {
             var input = document.getElementById('upload-file');

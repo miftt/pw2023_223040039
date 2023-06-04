@@ -140,12 +140,16 @@ body {
   position: relative;
   z-index: 6;
 }
+
 .menu__item {
   margin-left: 50px;
+  position: relative;
 }
+
 .menu__item:first-child {
   margin-left: 0;
 }
+
 .menu__link {
   font-family: "Sniglet", cursive;
   font-size: 16px;
@@ -155,6 +159,7 @@ body {
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
 }
+
 .menu__link:after {
   content: "";
   display: block;
@@ -164,8 +169,70 @@ body {
   background-color: var(--ijosangatgelap);
   transition: all 0.3s ease-in-out;
 }
+
 .menu__link:hover:after {
   width: 100%;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown:hover .submenu {
+  display: block;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding: 10px 0;
+  background-color: var(--ijoterang);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  animation: fade-in 0.3s ease-in-out forwards;
+}
+
+.submenu__item {
+  margin: 10px;
+  font-size: 17px;
+}
+
+.submenu__link {
+  color: var(--dark-blue);
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.submenu__link:hover {
+  color: var(--ijosangatgelap);
+}
+
+.dropdown__arrow {
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.menu__link .dropdown__arrow {
+  display: inline-block;
+  transition: transform 0.3s ease-in-out;
+}
+
+.menu__item:hover .menu__link .dropdown__arrow {
+  transform: rotate(180deg);
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ===================Home========================= */
