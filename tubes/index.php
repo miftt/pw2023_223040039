@@ -68,6 +68,9 @@ session_start();
                         <a href="halaman_admin.php" class="submenu__link">Admin Dashboard</a>
                       </li>
                       <li class="submenu__item">
+                        <a href="list_produk.php" class="submenu__link">Produk Dashboard</a>
+                      </li>
+                      <li class="submenu__item">
                         <a href="logout.php" class="submenu__link">Logout</a>
                       </li>
                     </ul>

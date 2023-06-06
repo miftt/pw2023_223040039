@@ -8,18 +8,31 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
-// Fungsi untuk mendapatkan data pengguna dari database
-function getUsers()
+// Fungsi untuk mendapatkan data produk dari database
+function getProducts()
 {
     global $conn;
-    $query = "SELECT * FROM users";
+    $query = "SELECT m.*, c.category_name FROM Menu m
+              LEFT JOIN Menu_Category mc ON m.menu_id = mc.menu_id
+              LEFT JOIN Category c ON mc.category_id = c.category_id";
     $result = mysqli_query($conn, $query);
-    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    return $users;
+    $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $products;
 }
 
-// Mendapatkan data pengguna dari database
-$users = getUsers();
+// Fungsi untuk mendapatkan data kategori dari database
+function getCategories()
+{
+    global $conn;
+    $query = "SELECT * FROM Category";
+    $result = mysqli_query($conn, $query);
+    $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $categories;
+}
+
+// Mendapatkan data produk dan kategori dari database
+$products = getProducts();
+$categories = getCategories();
 ?>
 
 <!DOCTYPE html>
@@ -35,58 +48,52 @@ $users = getUsers();
 
 <body>
     <div class="container">
-        <h1 class="mt-5">Admin Panel - Daftar Pengguna</h1>
+        <h1 class="mt-5">Admin Panel - Daftar Produk</h1>
         <div class="mt-5 d-grid gap-2 d-md-block">
             <a href="index.php" class="btn btn-primary btn-sm">Kembali Ke Halaman Utama</a>
         </div>
-        <input type="text" id="searchInput" class="form-control mt-3" placeholder="Cari pengguna...">
+        <input type="text" id="searchInput" class="form-control mt-3" placeholder="Cari produk...">
         <div class="row mt-3">
             <div class="col-md-6">
-                <?php $totalUsers = count($users); ?>
-                <h5>Total Pengguna: <span><?= $totalUsers; ?></span></h5>
+                <?php $totalProducts = count($products); ?>
+                <h5>Total Produk: <span><?= $totalProducts; ?></span></h5>
             </div>
             <div class="col-md-6 d-flex justify-content-md-end">
-                <a href="tambah.php" class="btn btn-primary">+ Tambah Pengguna</a>
+                <a href="tambah_produk.php" class="btn btn-primary">+ Tambah Produk</a>
             </div>
         </div>
         <table class="table mt-1">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Image Profile</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Nama Lengkap</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">No. Telepon</th>
-                    <th scope="col">Alamat</th>
-                    <th scope="col">Saldo</th>
-                    <th scope="col">Role</th>
+                    <th scope="col">Gambar</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Deskripsi</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">Kategori</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $i = 1;
-                foreach ($users as $user) : ?>
+                foreach ($products as $product) : ?>
                     <tr>
                         <th scope="row"><?= $i++; ?></th>
                         <td>
-                            <?php if (!empty($user['img_profile'])) : ?>
-                                <img src="img/users/<?php echo $user['img_profile']; ?>" width="100px">
+                            <?php if (!empty($product['menu_image'])) : ?>
+                                <img src=" img/<?= $product['menu_image']; ?>" width="100px">
                             <?php else : ?>
-                                <img src="img/users/default.png" width="70px">
+                                <img src="img/default.png" width="70px">
                             <?php endif; ?>
                         </td>
-                        <td><?php echo $user['username']; ?></td>
-                        <td><?php echo $user['full_name']; ?></td>
-                        <td><?php echo $user['email']; ?></td>
-                        <td><?php echo $user['phone_number']; ?></td>
-                        <td><?php echo $user['address']; ?></td>
-                        <td><?php echo $user['balance']; ?></td>
-                        <td><?php echo $user['role']; ?></td>
+                        <td><?php echo $product['menu_name']; ?></td>
+                        <td><?php echo $product['menu_description']; ?></td>
+                        <td><?php echo $product['menu_price']; ?></td>
+                        <td><?php echo $product['category_name']; ?></td>
                         <td>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a href="ubah.php?user_id=<?= $user['user_id']; ?>" class="btn btn-warning">Ubah</a>
-                                <a href="hapus.php?user_id=<?= $user['user_id']; ?>" onclick="return confirm('yakin?')" class="btn btn-danger ">Hapus</a>
+                                <a href="edit_produk.php?menu_id=<?= $product['menu_id']; ?>" class="btn btn-warning">Ubah</a>
+                                <a href="hapus_produk.php?menu_id=<?= $product['menu_id']; ?>" onclick="return confirm('Yakin ingin menghapus produk ini?')" class="btn btn-danger">Hapus</a>
                             </div>
                         </td>
                     </tr>

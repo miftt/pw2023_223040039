@@ -56,7 +56,7 @@ if (isset($_POST['upload'])) {
         }
 
         // Memindahkan gambar yang diunggah ke folder tujuan
-        move_uploaded_file($image_tmp, 'img/' . $image_new_name);
+        move_uploaded_file($image_tmp, 'img/users/' . $image_new_name);
 
         // Mengupdate kolom 'img_profile' dengan nama gambar yang baru di database
         $update_query = "UPDATE users SET img_profile = '$image_new_name' WHERE username = '$username'";
@@ -118,30 +118,32 @@ mysqli_close($conn);
             <a href="index.php" class="back-link">Kembali ke Halaman Utama</a>
             <h1>Halo <?php echo $full_name; ?></h1>
             <?php if (!empty($image)) { ?>
-                <img src="<?php echo 'img/' . $image; ?>" class="img-profile">
-            <?php } else { ?>
-                <img src="img/default.png" alt="Default Image" class="img-profile">
-            <?php } ?>
-            <form action="" method="POST" enctype="multipart/form-data">
-                <div class="upload-container">
-                    <input type="file" name="image" id="upload-file" onchange="displayFileName()" class="form-control-file">
-                    <label for="upload-file" class="btn btn-primary">Ganti Photo Profile</label>
-                    <span id="file-name"></span>
+                <div class="profile-img">
+                    <img src="<?php echo 'img/users/' . $image; ?>" class="img-profile">
+                <?php } else { ?>
+                    <img src="img/users/default.png" alt="Default Image" class="img-profile">
+                <?php } ?>
                 </div>
-                <button type="submit" name="upload" class="btn btn-primary upload-btn">Upload Image</button>
-            </form>
-            <div class="profile-info">
-                <p><strong>Username:</strong> <?php echo $username; ?></p>
-                <p><strong>Password:</strong> <a href="#">Change Password</a></p>
-                <p><strong>Full Name:</strong> <?php echo $full_name; ?><a href="#"> edit</a></p>
-                <p><strong>Jenis Kelamin:</strong> <?php echo $kelamin; ?><a href="#"> edit</a></p>
-                <p><strong>Tanggal Lahir:</strong> <?php echo $tgl_lahir; ?><a href="#"> edit</a></p>
-                <p><strong>Email:</strong> <?php echo $email; ?></p>
-                <p><strong>Phone Number:</strong> <?php echo $phone_number; ?><a href="#"> edit</a></p>
-                <p><strong>Alamat:</strong> <?php echo $address; ?><a href="#"> edit</a></p>
-                <p><strong>Saldo:</strong> <?php echo $balance; ?><a href="#"> isi saldo</a></p>
-            </div>
-            <a class="btn btn-danger logout-link" href="logout.php">Logout</a>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <div class="upload-container">
+                        <input type="file" name="image" id="upload-file" onchange="displayFileName()" class="form-control-file">
+                        <label for="upload-file" class="btn btn-primary">Ganti Photo Profile</label>
+                        <span id="file-name"></span>
+                    </div>
+                    <button type="submit" name="upload" class="btn btn-primary upload-btn">Upload Image</button>
+                </form>
+                <div class="profile-info">
+                    <p><strong>Username:</strong> <?php echo $username; ?></p>
+                    <p><strong>Password:</strong> <a href="#">Change Password</a></p>
+                    <p><strong>Full Name:</strong> <?php echo $full_name; ?><a href="#"> edit</a></p>
+                    <p><strong>Jenis Kelamin:</strong> <?php echo $kelamin; ?><a href="#"> edit</a></p>
+                    <p><strong>Tanggal Lahir:</strong> <?php echo $tgl_lahir; ?><a href="#"> edit</a></p>
+                    <p><strong>Email:</strong> <?php echo $email; ?></p>
+                    <p><strong>Phone Number:</strong> <?php echo $phone_number; ?><a href="#"> edit</a></p>
+                    <p><strong>Alamat:</strong> <?php echo $address; ?><a href="#"> edit</a></p>
+                    <p><strong>Saldo:</strong> <?php echo $balance; ?><a href="#"> isi saldo</a></p>
+                </div>
+                <a class="btn btn-danger logout-link" href="logout.php">Logout</a>
         </div>
     </div>
 
