@@ -117,7 +117,7 @@ if (isset($_POST['update'])) {
     <div class="container">
         <h1 class="mt-5">Edit Produk</h1>
         <div class="mt-5 d-grid gap-2 d-md-block">
-            <a href="menu.php" class="btn btn-primary btn-sm">Kembali Ke Daftar Produk</a>
+            <a href="list_produk.php" class="btn btn-primary btn-sm">Kembali Ke Dashboard</a>
         </div>
         <form action="" method="POST" enctype="multipart/form-data">
             <div class="form-group">

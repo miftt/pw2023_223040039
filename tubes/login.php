@@ -29,6 +29,8 @@ if (isset($_SESSION['username'])) {
     <?php } ?>
     <?php if (isset($_GET['success']) && $_GET['success'] == 0) { ?>
         <p class="error">Username atau email sudah digunakan. Silahkan pilih username atau email lain.</p>
+    <?php } elseif (isset($_GET['success']) && $_GET['success'] == 1) { ?>
+        <p class="success">Berhasil daftar akun! Silahkan login kembali</p>
     <?php } ?>
     <div class="container" id="container">
         <div class="form-container sign-up-container">

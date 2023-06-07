@@ -18,9 +18,11 @@ if (isset($_POST['signin'])) {
     if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
         $role = $row['role'];
+        $imgProfile = $row['img_profile'];
 
         // Login berhasil, simpan data sesi
         $_SESSION['username'] = $username;
+        $_SESSION['img_profile'] = $imgProfile;
         $_SESSION['role'] = $role;
         $_SESSION['session_id'] = session_id();
         $_SESSION['session_start'] = time();

@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
         <h1 class="mt-5">Tambah Produk</h1>
         <div class="mt-5 d-grid gap-2 d-md-block">
-            <a href="menu.php" class="btn btn-primary btn-sm">Kembali ke Menu</a>
+            <a href="list_produk.php" class="btn btn-primary btn-sm">Kembali ke dashboard</a>
         </div>
         <form method="POST" enctype="multipart/form-data" class="mt-5">
             <div class="form-group">

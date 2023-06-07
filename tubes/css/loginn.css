@@ -203,6 +203,9 @@ select {
 p.error {
   color: red;
 }
+p.success {
+  color: rgb(14, 77, 12);
+}
 
 .container.right-panel-active .overlay-container {
   transform: translateX(-100%);
