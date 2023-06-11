@@ -155,28 +155,28 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <h2 class="title" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1200">Payment Methods</h2>
                     <div class="payment__inner" data-aos="fade-up" data-aos-easing="bottom-bottom" data-aos-duration="1800">
                         <div class="payment__item payment__item-one">
-                            <a href="https://playvalorant.com/id-id/" class="payment__link" target="_blank">
+                            <a href="#payment" class="payment__link">
                                 <img src="img/bca.webp" alt="payment__img" class="payment__img" />
                             </a>
                             <div class="payment__text">BCA</div>
                         </div>
 
                         <div class="payment__item payment__item-two">
-                            <a href="#video" class="payment__link">
+                            <a href="#payment" class="payment__link">
                                 <img src="img/gopayy.png" alt="payment__img" class="payment__img" />
                             </a>
                             <div class="payment__text">Gopay</div>
                         </div>
 
                         <div class="payment__item payment__item-three">
-                            <a href="https://www.tiktok.com/@joseph.avenue" class="payment__link" target="_blank">
+                            <a href="#payment" class="payment__link">
                                 <img src="img/dana.png" alt="payment__img" class="payment__img" />
                             </a>
                             <div class="payment__text">Dana</div>
                         </div>
 
                         <div class="payment__item payment__item-four">
-                            <a href="https://open.spotify.com/user/21xjykbasyftcfnjv3ekzovja" class="payment__link" target="_blank">
+                            <a href="#payment" class="payment__link">
                                 <img src="img/ShopeePayy.png" alt="payment__img" class="payment__img" />
                             </a>
                             <div class="payment__text">Shoope Pay</div>
