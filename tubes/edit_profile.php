@@ -34,16 +34,17 @@ if (isset($_GET['user_id'])) {
         $phone_number = $_POST['phone_number'];
         $address = $_POST['address'];
         $tanggal_lahir = $_POST['tanggal_lahir'];
+        $jenis_kelamin = $_POST['jenis_kelamin'];
 
         // Cek apakah password diisi
         if (!empty($_POST['password'])) {
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
             // Update data pengguna ke database termasuk password
-            $query = "UPDATE users SET full_name = '$full_name', password = '$password', email = '$email', phone_number = '$phone_number', address = '$address', tgl_lahir = '$tanggal_lahir' WHERE user_id = '$user_id'";
+            $query = "UPDATE users SET full_name = '$full_name', password = '$password', email = '$email', phone_number = '$phone_number', address = '$address', tgl_lahir = '$tanggal_lahir', jenis_kelamin = '$jenis_kelamin' WHERE user_id = '$user_id'";
         } else {
             // Update data pengguna ke database tanpa mengubah password
-            $query = "UPDATE users SET full_name = '$full_name', email = '$email', phone_number = '$phone_number', address = '$address', tgl_lahir = '$tanggal_lahir'  WHERE user_id = '$user_id'";
+            $query = "UPDATE users SET full_name = '$full_name', email = '$email', phone_number = '$phone_number', address = '$address', tgl_lahir = '$tanggal_lahir', jenis_kelamin = '$jenis_kelamin'  WHERE user_id = '$user_id'";
         }
 
         $result = mysqli_query($conn, $query);
@@ -101,6 +102,13 @@ if (isset($_GET['user_id'])) {
             <div class="form-group">
                 <label for="phone_number">No. Telepon</label>
                 <input type="text" class="form-control" id="phone_number" name="phone_number" value="<?php echo $user['phone_number']; ?>">
+            </div>
+            <div class="form-group">
+                <label for="jenis_kelamin">Jenis Kelamin</label>
+                <select name="jenis_kelamin" require>
+                    <option value="laki-laki">Laki-laki</option>
+                    <option value="perempuan">Perempuan</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="address">Alamat</label>

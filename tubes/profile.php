@@ -141,7 +141,7 @@ mysqli_close($conn);
                 <p><strong>Email:</strong> <?php echo $email; ?></p>
                 <p><strong>Phone Number:</strong> <?php echo $phone_number; ?></p>
                 <p><strong>Alamat:</strong> <?php echo $address; ?></p>
-                <p><strong>Saldo:</strong> <?php echo $balance; ?><br><a href="#"> isi saldo</a></p>
+                <p><strong>Saldo:</strong> <?php echo $balance; ?></p>
             </div>
             <a class="btn btn-danger logout-link" href="logout.php">Logout</a>
         </div>
