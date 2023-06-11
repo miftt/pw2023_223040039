@@ -29,12 +29,12 @@ if (isset($_GET['user_id'])) {
 
     // Proses pembaruan data pengguna
     if (isset($_POST['submit'])) {
-        $full_name = $_POST['full_name'];
-        $email = $_POST['email'];
-        $phone_number = $_POST['phone_number'];
-        $address = $_POST['address'];
-        $tanggal_lahir = $_POST['tanggal_lahir'];
-        $jenis_kelamin = $_POST['jenis_kelamin'];
+        $full_name = htmlspecialchars($_POST['full_name']);
+        $email = htmlspecialchars($_POST['email']);
+        $phone_number = htmlspecialchars($_POST['phone_number']);
+        $address = htmlspecialchars($_POST['address']);
+        $tanggal_lahir = htmlspecialchars($_POST['tanggal_lahir']);
+        $jenis_kelamin = htmlspecialchars($_POST['jenis_kelamin']);
 
         // Cek apakah password diisi
         if (!empty($_POST['password'])) {
