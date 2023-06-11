@@ -1,6 +1,18 @@
 <?php
 require 'config.php';
 
+function query($query)
+{
+    global $conn;
+    $result = mysqli_query($conn, $query);
+
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {;
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
 function getUsers()
 {
     global $conn;
@@ -20,6 +32,7 @@ function getProducts()
     $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
     return $products;
 }
+
 
 // Fungsi untuk mendapatkan data kategori dari database
 function getCategories()

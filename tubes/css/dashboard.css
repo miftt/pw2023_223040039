@@ -7,7 +7,7 @@
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 li {
@@ -289,6 +289,16 @@ body {
 #content nav #switch-mode:checked + .switch-mode::before {
   left: calc(100% - (25px - 4px) - 2px);
 }
+#content nav .home-link {
+  font-size: 25px;
+  color: var(--dark);
+  text-decoration: none;
+}
+
+#content nav .home-link:hover {
+  color: var(--blue);
+}
+
 /* NAVBAR */
 
 /* MAIN */

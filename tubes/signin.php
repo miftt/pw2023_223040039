@@ -11,36 +11,41 @@ if (isset($_POST['signin'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Membuat query untuk memeriksa kecocokan username dan password pada tabel "users"
-    $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-    $result = mysqli_query($conn, $sql);
+    // Query untuk mengambil data pengguna berdasarkan username
+    $query = "SELECT * FROM users WHERE username = '$username'";
+    $result = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result) == 1) {
-        $row = mysqli_fetch_assoc($result);
-        $role = $row['role'];
-        $imgProfile = $row['img_profile'];
+        $user = mysqli_fetch_assoc($result);
 
-        // Login berhasil, simpan data sesi
-        $_SESSION['username'] = $username;
-        $_SESSION['img_profile'] = $imgProfile;
-        $_SESSION['role'] = $role;
-        $_SESSION['session_id'] = session_id();
-        $_SESSION['session_start'] = time();
-        $_SESSION['session_expire'] = $_SESSION['session_start'] + (60 * 30); // Sesinya akan kadaluarsa dalam 30 menit (60 detik * 30 menit)
+        if (password_verify($password, $user['password'])) {
+            // Login berhasil, simpan data sesi
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['img_profile'] = $user['img_profile'];
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['session_id'] = session_id();
+            $_SESSION['session_start'] = time();
+            $_SESSION['session_expire'] = $_SESSION['session_start'] + (60 * 30); // Sesinya akan kadaluarsa dalam 30 menit (60 detik * 30 menit)
 
-        // Arahkan ke halaman profile.php sesuai dengan peran (admin atau user)
-        if ($role == 'admin') {
-            header("Location: index.php");
+            // Arahkan ke halaman profile.php sesuai dengan peran (admin atau user)
+            if ($user['role'] == 'admin') {
+                header("Location: index.php");
+            } else {
+                header("Location: index.php");
+            }
+            exit();
         } else {
-            header("Location: index.php");
+            // Password tidak sesuai
+            header("Location: login.php?login_error=1");
+            exit();
         }
-        exit();
     } else {
-        // Login gagal, tampilkan pesan error
-        $error_message = "Username or password is incorrect.";
+        // Username tidak ditemukan
         header("Location: login.php?login_error=1");
         exit();
     }
 }
+
 
 mysqli_close($conn);

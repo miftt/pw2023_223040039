@@ -23,7 +23,7 @@ $product = mysqli_fetch_assoc($result);
 
 // Periksa apakah produk dengan menu_id yang diberikan ada di database
 if (!$product) {
-    header("Location: menu.php");
+    header("Location: list_produk.php");
     exit();
 }
 
@@ -42,5 +42,5 @@ $deleteQuery = "DELETE FROM Menu WHERE menu_id = $menuId";
 mysqli_query($conn, $deleteQuery);
 
 // Redirect ke halaman menu.php setelah hapus berhasil
-header("Location: menu.php");
+header("Location: list_produk.php?success=delete");
 exit();

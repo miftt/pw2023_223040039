@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
         $name = htmlspecialchars($_POST['fullname']);
         $phoneNumber = htmlspecialchars($_POST['phonenumber']);
         $email = htmlspecialchars($_POST['email']);
-        $password = $_POST['password'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $tgl_lahir = $_POST['tgl_lahir'];
         $kelamin = $_POST['jenis_kelamin'];
 

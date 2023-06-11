@@ -19,6 +19,7 @@ if (isset($_SESSION['username'])) {
     <title>Login Form</title>
     <link rel="stylesheet" href="css/loginn.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/Mif.png" />
 </head>
 
 <body>
@@ -66,12 +67,9 @@ if (isset($_SESSION['username'])) {
             <form action="signin.php" method="POST">
                 <h1>Sign in</h1>
                 <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
-                <span>or use your account</span>
-                <input type="username" name="username" placeholder="Username" required />
+                <span>Use your account</span>
+                <input type="username" name="username" placeholder="Username" required autofocus />
                 <input type="password" name="password" placeholder="Password" required />
                 <a href="#">Forgot your password?</a>
                 <button type="submit" name="signin">Sign In</button>

@@ -131,7 +131,7 @@ session_start();
                     Burger Plant Base adalah burger yang terbuat dari bahan-bahan nabati yang sehat, lezat, dan ramah lingkungan. Burger Plant Base tidak mengandung daging atau produk hewani lainnya, sehingga cocok untuk vegetarian, vegan, atau siapa saja yang ingin mengurangi konsumsi daging.
                   </p>
                   <br />
-                  <a href="menu.php" class="contact__button" target="_blank">See More</a>
+                  <a href="food_menu.php" class="contact__button" target="_blank">See More</a>
                 </div>
               </div>
               <div class="menus__column menus__column--two">
@@ -142,7 +142,7 @@ session_start();
                   <h2 class="menus__title">Drink</h2>
                   <p class="menus__text">Nikmati sensasi menyegarkan yang tak terlupakan dengan produk minuman kami yang unik dan menyegarkan. Minuman kami merupakan sumber vitamin alami yang sangat dibutuhkan oleh tubuh Anda.</p>
                   <br />
-                  <a href="drinkmenu.php" class="contact__button" target="_blank">See More</a>
+                  <a href="drink_menu.php" class="contact__button" target="_blank">See More</a>
                 </div>
               </div>
             </div>

@@ -28,7 +28,7 @@ if (isset($_GET['user_id'])) {
 
     if ($deleteResult) {
         // Redirect ke halaman admin setelah berhasil menghapus data
-        header("Location: halaman_admin.php");
+        header("Location: halaman_admin.php?success=delete");
         exit();
     } else {
         // Tampilkan pesan error jika gagal menghapus data

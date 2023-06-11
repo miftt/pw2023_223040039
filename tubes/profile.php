@@ -2,7 +2,7 @@
 include 'config.php';
 session_start();
 // Mengatur path gambar default
-$defaultImage = 'path/to/img/default.png';
+$defaultImage = 'img/users/default.png';
 
 // Memeriksa apakah $image memiliki nilai atau tidak
 if (empty($image)) {
@@ -40,8 +40,7 @@ if (isset($_POST['upload'])) {
         // Periksa apakah ekstensi file yang diunggah valid
         if (!in_array($image_extension, $extension_image_valid)) {
             echo "<script>
-                    alert('Tolong masukkan format gambar yang benar (jpg, jpeg, atau png).');
-                    window.location.href = 'profile.php';
+                    window.location.href = 'profile.php?error=img';
                  </script>";
             exit();
         }
@@ -49,8 +48,7 @@ if (isset($_POST['upload'])) {
         // Periksa ukuran file
         if ($image_size > 4000000) {
             echo "<script>
-                    alert('Ukuran Gambar Terlalu Besar, Max 4MB.');
-                    window.location.href = 'profile.php';
+                    window.location.href = 'profile.php?error=size';
                  </script>";
             exit();
         }
@@ -63,7 +61,7 @@ if (isset($_POST['upload'])) {
         mysqli_query($conn, $update_query);
 
         // Redirect ke halaman profile setelah mengupdate gambar
-        header("Location: profile.php");
+        header("Location: profile.php?success=1");
         exit();
     }
 }
@@ -77,6 +75,7 @@ if (mysqli_num_rows($result) > 0) {
     // Data pengguna ditemukan, tampilkan informasinya
     $row = mysqli_fetch_assoc($result);
 
+    $user_id = $row['user_id'];
     $username = htmlspecialchars($row['username']);
     $full_name = htmlspecialchars($row['full_name']);
     $email = htmlspecialchars($row['email']);
@@ -110,6 +109,7 @@ mysqli_close($conn);
     <title><?php echo $full_name; ?> Profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/profile.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/Mif.png" />
 </head>
 
 <body>
@@ -117,55 +117,101 @@ mysqli_close($conn);
         <div class="profile-container">
             <a href="index.php" class="back-link">Kembali ke Halaman Utama</a>
             <h1>Halo <?php echo $full_name; ?></h1>
-            <?php if (!empty($image)) { ?>
-                <div class="profile-img">
-                    <img src="<?php echo 'img/users/' . $image; ?>" class="img-profile">
+            <div class="profile-img">
+                <?php if (!empty($image)) { ?>
+                    <img src="<?php echo 'img/users/' . $image; ?>" class="img-profile" id="profileImage">
                 <?php } else { ?>
-                    <img src="img/users/default.png" alt="Default Image" class="img-profile">
+                    <img src="img/users/default.png" class="img-profile" id="profileImage">
                 <?php } ?>
-                </div>
-                <form action="" method="POST" enctype="multipart/form-data">
-                    <div class="upload-container">
-                        <input type="file" name="image" id="upload-file" onchange="displayFileName()" class="form-control-file">
-                        <label for="upload-file" class="btn btn-primary">Ganti Photo Profile</label>
-                        <span id="file-name"></span>
-                    </div>
+            </div>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div class="upload-container">
+                    <input type="file" name="image" id="uploadFile" onchange="displayFileName()" class="form-control-file">
+                    <label for="uploadFile" class="btn btn-primary">Ganti Photo Profile</label>
+                    <span id="fileName"></span>
                     <button type="submit" name="upload" class="btn btn-primary upload-btn">Upload Image</button>
-                </form>
-                <div class="profile-info">
-                    <p><strong>Username:</strong> <?php echo $username; ?></p>
-                    <p><strong>Password:</strong> <a href="#">Change Password</a></p>
-                    <p><strong>Full Name:</strong> <?php echo $full_name; ?><a href="#"> edit</a></p>
-                    <p><strong>Jenis Kelamin:</strong> <?php echo $kelamin; ?><a href="#"> edit</a></p>
-                    <p><strong>Tanggal Lahir:</strong> <?php echo $tgl_lahir; ?><a href="#"> edit</a></p>
-                    <p><strong>Email:</strong> <?php echo $email; ?></p>
-                    <p><strong>Phone Number:</strong> <?php echo $phone_number; ?><a href="#"> edit</a></p>
-                    <p><strong>Alamat:</strong> <?php echo $address; ?><a href="#"> edit</a></p>
-                    <p><strong>Saldo:</strong> <?php echo $balance; ?><a href="#"> isi saldo</a></p>
                 </div>
-                <a class="btn btn-danger logout-link" href="logout.php">Logout</a>
+            </form>
+            <div class="profile-info">
+                <a href="edit_profile.php?user_id=<?php echo $user_id; ?>" class="btn btn-primary btn-sm mb-2">Edit Profile</a>
+                <p><strong>Username:</strong> <?php echo $username; ?></p>
+                <p><strong>Full Name:</strong> <?php echo $full_name; ?></p>
+                <p><strong>Jenis Kelamin:</strong> <?php echo $kelamin; ?></p>
+                <p><strong>Tanggal Lahir:</strong> <?php echo $tgl_lahir; ?></p>
+                <p><strong>Email:</strong> <?php echo $email; ?></p>
+                <p><strong>Phone Number:</strong> <?php echo $phone_number; ?></p>
+                <p><strong>Alamat:</strong> <?php echo $address; ?></p>
+                <p><strong>Saldo:</strong> <?php echo $balance; ?><br><a href="#"> isi saldo</a></p>
+            </div>
+            <a class="btn btn-danger logout-link" href="logout.php">Logout</a>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
     <script>
         function displayFileName() {
-            var input = document.getElementById('upload-file');
-            var fileNameDisplay = document.getElementById('file-name');
+            var input = document.getElementById('uploadFile');
+            var fileNameDisplay = document.getElementById('fileName');
+            var profileImage = document.getElementById('profileImage');
             var uploadBtn = document.querySelector('.upload-btn');
 
             if (input.files.length > 0) {
                 var fileName = input.files[0].name;
                 fileNameDisplay.textContent = fileName;
                 fileNameDisplay.style.display = 'block';
-                uploadBtn.classList.add('show');
+                profileImage.src = URL.createObjectURL(input.files[0]);
+                uploadBtn.style.display = 'block';
             } else {
                 fileNameDisplay.textContent = '';
                 fileNameDisplay.style.display = 'none';
-                uploadBtn.classList.remove('show');
+                uploadBtn.style.display = 'none';
             }
         }
+    </script>
+    <script>
+        <?php if (isset($_GET['success']) && $_GET['success'] == 1) { ?>
+            Swal.fire({
+                icon: 'success',
+                title: 'Gambar berhasil diperbarui!',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true
+            });
+        <?php } elseif (isset($_GET['success']) && $_GET['success'] == "edit") { ?>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil mengubah data profile',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true
+            });
+        <?php } elseif (isset($_GET['success']) && $_GET['success'] == 0) { ?>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal user data pengguna!',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true
+            });
+        <?php } elseif (isset($_GET['error']) && $_GET['error'] == 'size') { ?>
+            Swal.fire({
+                icon: 'error',
+                title: 'Ukuran Gambar Terlalu Besar, Max 4MB!',
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true
+            });
+        <?php } elseif (isset($_GET['error']) && $_GET['error'] == 'img') { ?>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gunakan format PNG, JPG, JPEG',
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true
+            });
+        <?php } ?>
     </script>
 </body>
 

@@ -26,7 +26,8 @@ $orderDetails = getOrderDetails();
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<title>Dashboard Admin</title>
-	<link rel="stylesheet" href="css/dashboard.css">
+	<?php require 'views/utils/header.php' ?>
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/Mif.png" />
 </head>
 
 <body>
@@ -56,20 +57,8 @@ $orderDetails = getOrderDetails();
 					<span class="text">Daftar Products</span>
 				</a>
 			</li>
-			<li>
-				<a href="#">
-					<i class='bx bxs-message-dots'></i>
-					<span class="text">Message</span>
-				</a>
-			</li>
 		</ul>
 		<ul class="side-menu">
-			<li>
-				<a href="#">
-					<i class='bx bxs-cog'></i>
-					<span class="text">Settings</span>
-				</a>
-			</li>
 			<li>
 				<a href="logout.php" class="logout">
 					<i class='bx bxs-log-out-circle'></i>
@@ -87,23 +76,18 @@ $orderDetails = getOrderDetails();
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu'></i>
-			<a href="#" class="nav-link">Categories</a>
+			<a href="index.php" class="home-link">
+				<i class='bx bx-home'></i>
+			</a>
 			<form action="#">
 				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
 				</div>
 			</form>
-			<input type="checkbox" id="switch-mode" hidden>
-			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="notification">
-				<i class='bx bxs-bell'></i>
-				<span class="num">8</span>
-			</a>
-			<a href="#" class="profile">
+			<a href="profile.php" class="profile">
 				<img src="img/users/<?php echo $_SESSION['img_profile']; ?>">
 			</a>
 		</nav>
+
 		<!-- NAVBAR -->
 
 		<!-- MAIN -->
@@ -117,10 +101,6 @@ $orderDetails = getOrderDetails();
 						</li>
 					</ul>
 				</div>
-				<a href="#" class="btn-download">
-					<i class='bx bxs-cloud-download'></i>
-					<span class="text">Download PDF</span>
-				</a>
 			</div>
 			<?php $i = 0; // Initialize $i to 0 before the loop 
 			?>
