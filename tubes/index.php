@@ -196,18 +196,19 @@ session_start();
               just contact me at below!
             </p>
             <!-- Contact Form -->
+            <!-- Contact Form -->
             <div class="contact-form">
-              <form>
+              <form id="contact-form">
                 <h2>Contact Me Here</h2>
                 <input type="text" class="field" placeholder="First Name" required />
                 <input type="text" class="field" placeholder="Last Name" required />
                 <br />
                 <input type="email" class="field" placeholder="Your email" required />
-                <input type="text" class="field" cols="30" rows="4" placeholder="Your Phone" required />
+                <input type="text" class="field" placeholder="Your Phone" required />
                 <h4>Type Your Message Here....</h4>
                 <textarea required></textarea>
                 <br />
-                <a href="http://www.instagram.com/miftfauzi" class="contact__button" target="_blank">Send message</a>
+                <button type="submit" class="contact__button">Send message</button>
               </form>
             </div>
             <ul class="contact__list">
@@ -255,8 +256,59 @@ session_start();
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   <script src="js/script.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
   <script>
     AOS.init();
+  </script>
+  <script>
+    const form = document.getElementById('contact-form');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Mengambil nilai input
+      const firstName = document.querySelector('.field[placeholder="First Name"]').value;
+      const lastName = document.querySelector('.field[placeholder="Last Name"]').value;
+      const email = document.querySelector('.field[placeholder="Your email"]').value;
+      const phone = document.querySelector('.field[placeholder="Your Phone"]').value;
+      const message = document.querySelector('textarea').value;
+
+      // Mengirim pesan melalui Webhook Discord
+      const webhookURL = 'https://discord.com/api/webhooks/1117480552459669614/UqWuQAA25WRGG2IKyPkJ7jZdR96Lw23qBlQd2XZK5ovKkaoc4X5QyHCvTMAwGrtUcuQJ'; // Ganti dengan URL webhook Discord Anda
+      const payload = {
+        username: 'Contact Form',
+        content: `New message from Website GreenBites \nFullname: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`
+      };
+
+      fetch(webhookURL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        })
+        .then(response => {
+          if (response.ok) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Message sent successfully'
+            }).then(() => {
+              form.reset();
+            });
+          } else {
+            throw new Error('Error sending message');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error sending message'
+          });
+        });
+    });
   </script>
 </body>
 
