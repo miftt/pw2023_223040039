@@ -192,7 +192,7 @@ session_start();
           <div class="contact__inner">
             <h2 class="title">Contacts</h2>
             <p class="contact__text">
-              Want to know more about me? <br />
+              Interested in partnering with us?? <br />
               just contact me at below!
             </p>
             <!-- Contact Form -->
